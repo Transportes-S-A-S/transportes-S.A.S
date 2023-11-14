@@ -38,36 +38,36 @@ export class MyElement extends LitElement{
                         </div>
                         <div class="card-body ">
                             
-                            <form class="formulario">
+                            <form class="formulario" @submit="${this._handleSubmit}">
                             
                                 <div class="form-group form" >
                                     <center style="font-size: 25px;"> Ruta</center>
                                     
-                                    <center><input type="text" class="p" name="Nombre ruta" placeholder="Nombre ruta" required></center>
+                                    <center><input id="nombreRuta" type="text" class="p" name="Nombre ruta" placeholder="Nombre ruta" required></center>
                                 </div>
                                 
                                 <div class="form-group form p" >
                                     <center style="font-size: 25px;">Lugar Inicio ruta</center>
                                     
-                                    <center><input type="text" class="p" name="Lugar Inicio ruta" placeholder="Lugar Inicio ruta" required></center>
+                                    <center><input id="InRuta" type="text" class="p" name="Lugar Inicio ruta" placeholder="Lugar Inicio ruta" required></center>
                                 </div>
 
                                 <div class="form-group form p" >
                                     <center style="font-size: 25px;">Lugar Fin ruta</center>
                                     
-                                    <center><input type="text" class="p" name=" Lugar Fin ruta" placeholder="Lugar Fin ruta" required></center>
+                                    <center><input id="FiRuta" type="text" class="p" name=" Lugar Fin ruta" placeholder="Lugar Fin ruta" required></center>
                                 </div>
 
                                 <div class="form-group form p" >
                                     <center style="font-size: 25px;">Horario</center>
                                     
-                                    <center><input type="text" class="p" name="Horario" placeholder="Horario" required></center>
+                                    <center><input type="text" id="Hora" class="p" name="Horario" placeholder="Horario" required></center>
                                 </div>
 
                                 <div class="form-group form p" >
                                     <center style="font-size: 25px;">Consorcio</center>
                                     
-                                    <center><input type="text" class="p" name="Consorcio" placeholder="Consorcio" required></center>
+                                    <center><input type="text" id="consorcio" class="p" name="Consorcio" placeholder="Consorcio" required></center>
                                 </div>
                                 
                                 <div class="button">
@@ -90,6 +90,22 @@ export class MyElement extends LitElement{
 
         `;
     }
+    _handleSubmit(event) {
+        event.preventDefault();
+        // Lógica de manejo de envío del formulario
+        const nombreRuta = this.shadowRoot.getElementById('nombreRuta').value;
+        const InRuta = this.shadowRoot.getElementById('InRuta').value;
+        const FiRuta = this.shadowRoot.getElementById('FiRuta').value;
+        const Hora = this.shadowRoot.getElementById('Hora').value;
+        const consorcio = this.shadowRoot.getElementById('consorcio').value;
+
+        // Realiza acciones con los datos del formulario
+       
+        let Rutas=[]
+        let Ruta=[nombreRuta, InRuta, FiRuta, Hora, consorcio]
+        Rutas.push(Ruta)
+        alert("La Ruta fue registrada \n" +Rutas)
+      }
 }
 
 customElements.define('my-form', MyElement)

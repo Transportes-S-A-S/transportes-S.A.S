@@ -8,7 +8,6 @@ export class MyElement extends LitElement {
         return [stylesScss];
     }
     
-    
     render() {
         return html`
         <!DOCTYPE html>
@@ -29,22 +28,22 @@ export class MyElement extends LitElement {
        
       <div class="card card">
         <div class="card-header titulo">
-           <h1 style="font-size: 50px;"> Transporte S.A.S</h1>
+           <h1 style="font-size: 50px;"> Registrar</h1>
         </div>
         <div class="card-body">
             
-            <form @submit="${this._handleSubmit}"class="formulario">
+            <form class="formulario">
                
                 <br>
                 <div class="form-group form" >
                     
-                    <input type="text" id="username" name="username" placeholder="Usuario" required>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
                 </div>
                 <br>
                 <br>
                 <div class="form-group form">
             
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="contraseña" name="contraseña" placeholder="Password" required>
                 </div>
                 <br>
                 <br>
@@ -53,7 +52,7 @@ export class MyElement extends LitElement {
                     <p></p>
                     <a href="registroRuta.html" style="color: black; text-decoration: none;">Olvide mi contraseña..</a>
                     <p></p>
-                    <a href="registrarme.html" style="font-size:20% color: blue; text-decoration: none;">No tengo cuenta, registrarme</a>
+                    <a href="registrarme.html" style="color: black; text-decoration: none;">No tengo cuenta, registrarme</a>
                 </div>
             </div>
         
@@ -70,25 +69,6 @@ export class MyElement extends LitElement {
 
         `;
     }
-    _handleSubmit(event) {
-        event.preventDefault();
-    
-        const username = this.shadowRoot.getElementById('username').value;
-        const password = this.shadowRoot.getElementById('password').value;
-    
-        // Validación con datos quemados (usuario: admin, contraseña: password)
-        if (username === 'transportes' && password === 'trans123') {
-          // Inicio de sesión exitoso
-        
-          window.location.href='/registroRuta.html'
-
-          // Puedes emitir un evento personalizado aquí si es necesario
-        } else {
-          // Inicio de sesión fallido
-          alert('Inicio de sesión fallido. Verifica tus credenciales.');
-          // Puedes emitir un evento personalizado aquí si es necesario
-        }
-      }
 }
 
 customElements.define('my-login', MyElement);

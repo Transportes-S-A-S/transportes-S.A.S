@@ -34,31 +34,31 @@ export class MyElement extends LitElement{
                     </div>
                 </div>
                 
-                <form class="card-login" method="post" action="">
+                <form class="card-login" method="post" action="" @submit="${this._handleSubmit}">
 
                     <br>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Nombre">
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
                         <label for="floatingInput">Nombre</label>
                       </div>
                     
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Apellido">
+                        <input type="text" class="form-control" id="apellido" placeholder="Apellido">
                         <label for="floatingInput">Apellido</label>
                       </div>
                     
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="No. placa">
+                        <input type="text" class="form-control" id="placa" placeholder="No. placa">
                         <label for="floatingInput">Placa</label>
                       </div>
                     <div class="form-floating mb-3">
-                        <input type="time" class="form-control" id="floatingInput" placeholder="Hora de ingreso">
+                        <input type="time" class="form-control" id="horaI" placeholder="Hora de ingreso">
                         <label for="floatingInput">Hora de ingreso</label>
                       </div>
                     
                     <div class="form-floating mb-3">
-                        <input type="time" class="form-control" id="floatingInput" placeholder="Hora de salida">
+                        <input type="time" class="form-control" id="horaS" placeholder="Hora de salida">
                         <label for="floatingInput">Hora de salida</label>
                       </div>
                     <br>
@@ -80,5 +80,21 @@ export class MyElement extends LitElement{
         `
         ;
     }
+    _handleSubmit(event) {
+        event.preventDefault();
+        // Lógica de manejo de envío del formulario
+        const nombre = this.shadowRoot.getElementById('nombre').value;
+        const apellido = this.shadowRoot.getElementById('apellido').value;
+        const placa = this.shadowRoot.getElementById('placa').value;
+        const horaI = this.shadowRoot.getElementById('horaI').value;
+        const horaS = this.shadowRoot.getElementById('horaS').value;
+        // Realiza acciones con los datos del formulario
+       
+        let Horarios=[]
+        let Horario=[nombre,apellido,placa,horaI,horaS]
+        Horarios.push(Horario)
+        alert("El ingreso y salida fueron registrados \n" +Horarios)
+      }
+    
 }
 customElements.define('my-form2', MyElement)
