@@ -25,6 +25,8 @@ export default css`
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+
   }
   .my-button:hover {
     background-color: #7483ff;
