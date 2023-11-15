@@ -4,13 +4,53 @@ export class MyElement extends LitElement{
     static get styles(){
         return[login_style];
     }
-    render(){
+    constructor() {
+        super();
+        this.dialogMessage = "";
+        this.nombre = localStorage.getItem("nombre") || "";
+        this.apellido = localStorage.getItem("apellido") || "";
+        this.placa = localStorage.getItem("placa") || "";
+        this.horaI = localStorage.getItem("horaI") || "";
+        this.horaS =localStorage.getItem("horaS") || "";
+        
+      }
+    
+      handleSubmit() {
+        this.nombre = this.shadowRoot.querySelector("#nombre").value;
+        this.apellido = this.shadowRoot.querySelector("#apellido").value;
+        this.placa = this.shadowRoot.querySelector("#placa").value;
+        this.horaI = this.shadowRoot.querySelector("#horaI").value;
+        this.horaS = this.shadowRoot.querySelector("#horaS").value;
+        
+    
+        let data = {
+          nombre: this.nombre,
+          apellido: this.apellido,
+          placa: this.placa,
+          horaI: this.horaI,
+          horaS: this.horaS,
+        };
+    
+        console.log(data);
+    
+        localStorage.setItem("transporte", JSON.stringify(data));
+        this.dialogMessage = "Los datos se han guardado correctamente.";
+      }
+    
+      closeDialog() {
+        this.dialogMessage = "";
+      }
+      render() {
         return html`
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
+          <html lang="en">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/c628e42b8b.js" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/c628e42b8b.js" crossorigin="anonymous"></script>
 
-        <div class="container-fluid">
+            <body>
+              
+              <div class="container-fluid">
     <div class="row">
         <div clas="col-sm-1"></div>
         <div class="col-sm-10 text-center">
@@ -34,12 +74,13 @@ export class MyElement extends LitElement{
                     </div>
                 </div>
                 
-                <form class="card-login" method="post" action="" @submit="${this._handleSubmit}">
+                <form class="card-login" method="post" action="">
 
                     <br>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                        
+                    <input type="text" class="form-control" id="nombre" value="${this.nombre}" placeholder="Nombre">
                         <label for="floatingInput">Nombre</label>
                       </div>
                     
@@ -63,12 +104,20 @@ export class MyElement extends LitElement{
                       </div>
                     <br>
                     <div class="text-center">
-                        <button class="my-button">Registrar</button>
+                            <a
+                              @click="${(e) => 
+                                this.handleSubmit()
+                              }"
+                            class="my-button"
+                            href="registrarIngreso.html"
+                            >  
+                            Registrar
+                            </a>
+                            
+
                                             </div>
-                    <br>
-                    <div class="d-grid gap-2 text-center">
-                        <a href="#" class="Link_reset-pass">Volver</a>
-                    </div>
+                    
+        
                     
                 </form>
             </div>
@@ -76,25 +125,32 @@ export class MyElement extends LitElement{
         </div>
         
     </div>
-    
-        `
-        ;
-    }
-    _handleSubmit(event) {
-        event.preventDefault();
-        // Lógica de manejo de envío del formulario
-        const nombre = this.shadowRoot.getElementById('nombre').value;
-        const apellido = this.shadowRoot.getElementById('apellido').value;
-        const placa = this.shadowRoot.getElementById('placa').value;
-        const horaI = this.shadowRoot.getElementById('horaI').value;
-        const horaS = this.shadowRoot.getElementById('horaS').value;
-        // Realiza acciones con los datos del formulario
-       
-        let Horarios=[]
-        let Horario=[nombre,apellido,placa,horaI,horaS]
-        Horarios.push(Horario)
-        alert("El ingreso y salida fueron registrados \n" +Horarios)
+
+
+
+
+
+
+
+
+              <br />
+              <br />
+              <!-- Cuadro de diálogo -->
+              ${this.dialogMessage
+                ? html`
+                    <div class="dialog-overlay">
+                      <div class="dialog-box">
+                        <p>${this.dialogMessage}</p>
+                        <button @click="${this.closeDialog}">Cerrar</button>
+                      </div>
+                    </div>
+                  `
+                : ""}
+            </body>
+          </html>
+        `;
       }
+    }
     
-}
 customElements.define('my-form2', MyElement)
+
